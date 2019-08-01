@@ -338,6 +338,12 @@ func parseProviderInfo(o *Options, msgs []string) []string {
 				p.JWTKey = signKey
 			}
 		}
+	case *providers.OIDCIBMProvider:
+		if o.oidcVerifier == nil {
+			msgs = append(msgs, "oidc provider requires an oidc issuer URL")
+		} else {
+			p.Verifier = o.oidcVerifier
+		}
 	}
 	return msgs
 }
